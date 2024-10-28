@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Inicio de Sesión - UABC</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+
+<body>
+    <div class="background">
+        <div class="login-container">
+            <img src="Isotipo.png" alt="Logo UABC" class="logo" />
+
+            <div class="login-box">
+                <h2>Inicio de Sesión</h2>
+
+                <form id="loginForm" action="login" method="post">
+                    <div class="input-group">
+                        <label for="correo">Correo</label>
+                        <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" />
+                    </div>
+
+                    <button type="submit" class="login-btn">Iniciar Sesión</button>
+                </form>
+
+                <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+            </div>
+        </div>
+
+        <div id="alertaError" class="alerta oculto">
+            <strong>Error:</strong> Debes llenar todos los campos.
+            <button onclick="cerrarAlerta('alertaError')">&#x2716;</button>
+        </div>
+
+        <div id="alertaCorreo" class="alerta oculto">
+            <strong>Error:</strong> Correo o contraseña no válidos.
+            <button onclick="cerrarAlerta('alertaCorreo')">&#x2716;</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const form = document.getElementById('loginForm');
+        const alertaError = document.getElementById('alertaError');
+        const alertaCorreo = document.getElementById('alertaCorreo');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Detiene el envío para validación.
+
+            const correo = document.getElementById('correo').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            const correoValido = "usuario@ejemplo.com"; // Correo registrado de ejemplo.
+
+            if (correo === '' || password === '') {
+                mostrarAlerta(alertaError);
+            } else if (correo !== correoValido) {
+                mostrarAlerta(alertaCorreo);
+            } else {
+                form.submit(); // Envía el formulario si todo está correcto.
+            }
+        });
+
+        function mostrarAlerta(alerta) {
+            alerta.classList.remove('oculto');
+        }
+
+        function cerrarAlerta(id) {
+            document.getElementById(id).classList.add('oculto');
+        }
+    </script>
+</body>
+
+</html>
