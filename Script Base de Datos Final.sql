@@ -14,11 +14,14 @@ CREATE TABLE Categoria (
     Nombre VARCHAR(50) NOT NULL
 );
 
--- Crear tabla Autor
+-- Crear tabla Autor con las nuevas columnas Organización y Cargo
 CREATE TABLE Autor (
     AutorID SERIAL PRIMARY KEY,
-    Nombre VARCHAR(50) NOT NULL
+    Nombre VARCHAR(50) NOT NULL,
+    Organización VARCHAR(50),
+    Cargo VARCHAR(50)
 );
+
 
 -- Crear tabla Noticia
 CREATE TABLE Noticia (
