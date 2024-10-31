@@ -27,7 +27,7 @@ CREATE TABLE Autor (
 CREATE TABLE Noticia (
     NoticiaID SERIAL PRIMARY KEY,
     Titulo VARCHAR(80) NOT NULL,
-    Cuerpo TEXT NOT NULL,
+    Contenido TEXT NOT NULL,
     FechaCreacion DATE NOT NULL,
     FechaPublicacion DATE,
     AdministradorID INT,
