@@ -16,10 +16,10 @@ public class LoginJava extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String correo = request.getParameter("correo");
-        String password = request.getParameter("password");
+        String password = request.getParameter("contraseña");
 
         try (Connection connection = DatabaseConnection.getConnection()) {
-            // Actualizamos el nombre del campo de la contraseña en la consulta
+            // Cambiamos "password" a "contraseña" en la consulta para que coincida con la base de datos
             String sql = "SELECT * FROM administrador WHERE correo = ? AND contraseña = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, correo);
@@ -29,7 +29,9 @@ public class LoginJava extends HttpServlet {
 
                 if (resultSet.next()) {
                     // Usuario autenticado correctamente
-                    response.sendRedirect("principal.html");
+                    response.sendRedirect("/java/wyoming.wyominggestor/principal.html");
+
+
                 } else {
                     // Credenciales incorrectas
                     response.sendRedirect("error.html");
