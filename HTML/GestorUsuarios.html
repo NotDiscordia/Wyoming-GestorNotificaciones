@@ -120,12 +120,28 @@
             font-size: 2rem;
             color: #333;
         }
+        .btn-help {
+            background-color: black;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 0px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <img src="https://static.wixstatic.com/media/d37dc4_5386a03afdd34069a3b43974d6b2a3ce~mv2.png/v1/fill/w_296,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/UABC_escudo_SER%20(2).png" alt="LogoUABC">
-        <a href="principal.html">Volver al Menú Principal</a>
+        <a href='/Wyoming-GestorNotificaciones/Noticia/src/webapp/WEB-INF/index.html'>Volver al Menú Principal</a>
         <a href="GestorNoticias.html">Ir a Gestión de Noticias</a>
     </div>
 
@@ -173,9 +189,7 @@
     </div>
 
     <div class="footer">
-        <a href="ayuda.html">
-            <span style="font-size: 2rem;">&#10067;</span>
-        </a>
+        <button class="btn-help" onclick="window.location.href='Ayuda.html'">?</button>
     </div>
 </body>
 </html>
