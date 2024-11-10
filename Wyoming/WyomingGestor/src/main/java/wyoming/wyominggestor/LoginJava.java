@@ -29,7 +29,7 @@ public class LoginJava extends HttpServlet {
 
                 if (resultSet.next()) {
                     // Usuario autenticado correctamente
-                    response.sendRedirect("/java/wyoming.wyominggestor/principal.html");
+                    response.sendRedirect("/java/wyoming.wyominggestor/index.html");
 
 
                 } else {

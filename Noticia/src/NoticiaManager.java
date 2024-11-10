@@ -1,85 +1,63 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+import java.sql.Timestamp;
 
 public class NoticiaManager {
+    // Información de conexión a la base de datos
     private static final String URL = "jdbc:postgresql://localhost:5432/WyomingGestor";
     private static final String USER = "postgres";
     private static final String PASSWORD = "1234";
 
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
+    /**
+     * Método para registrar una noticia en la base de datos
+     * @param titulo Título de la noticia
+     * @param autor Autor de la noticia
+     * @param contenido Contenido de la noticia
+     * @param fecha Fecha de creación de la noticia
+     * @param categoria Categoría de la noticia
+     * @return true si la inserción fue exitosa, false en caso contrario
+     */
+    public boolean registrarNoticia(String titulo, String autor, String contenido, String fecha, String categoria) {
+        boolean success = false;
+        String query = "INSERT INTO Noticia (titulo, autor, contenido, fecha, categoria) VALUES (?, ?, ?, ?, ?)";
 
-    // Método para insertar una noticia
-    public void insertarNoticia(String titulo, String autor, String contenido, String fechaCreacion, String fechaPublicacion, int categoriaID) {
-        String sql = "INSERT INTO Noticia (Titulo, Contenido, FechaCreacion, FechaPublicacion, CategoriaID) VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, titulo);
-            pstmt.setString(2, contenido);
-            pstmt.setDate(3, java.sql.Date.valueOf(fechaCreacion)); // formato YYYY-MM-DD
-            pstmt.setDate(4, java.sql.Date.valueOf(fechaPublicacion)); // formato YYYY-MM-DD
-            pstmt.setInt(5, categoriaID);
-            pstmt.executeUpdate();
-            System.out.println("Noticia insertada correctamente.");
-        } catch (SQLException e) {
-            System.out.println("Error al insertar la noticia: " + e.getMessage());
+        // Convertir la fecha en formato String a un Timestamp si es necesario
+        Timestamp fechaTimestamp = null;
+        try {
+            fechaTimestamp = Timestamp.valueOf(fecha);  // Asegúrate de que el formato sea correcto
+        } catch (IllegalArgumentException e) {
+            System.err.println("Fecha inválida: " + fecha);
+            return false;
         }
-    }
 
-    // Método para mostrar todas las noticias
-    public void mostrarNoticias() {
-        String sql = "SELECT NoticiaID, Titulo, Contenido, FechaCreacion, FechaPublicacion FROM Noticia";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            if (connection != null && !connection.isClosed()) {
+                System.out.println("Conexión exitosa");
 
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
-            while (rs.next()) {
-                int noticiaID = rs.getInt("NoticiaID");
-                String titulo = rs.getString("Titulo");
-                String contenido = rs.getString("Contenido");
-                String fechaCreacion = rs.getDate("FechaCreacion").toString();
-                String fechaPublicacion = rs.getDate("FechaPublicacion") != null ? rs.getDate("FechaPublicacion").toString() : "N/A";
-                System.out.println("ID: " + noticiaID + ", Título: " + titulo + ", Contenido: " + contenido +
-                        ", Fecha de Creación: " + fechaCreacion + ", Fecha de Publicación: " + fechaPublicacion);
+                // Configurar la consulta SQL
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, titulo);
+                    statement.setString(2, autor);
+                    statement.setString(3, contenido);
+                    statement.setTimestamp(4, fechaTimestamp);  // Usar Timestamp para la fecha
+                    statement.setString(5, categoria);
+
+                    // Ejecutar la inserción
+                    int rowsInserted = statement.executeUpdate();
+                    if (rowsInserted > 0) {
+                        success = true;
+                    }
+                }
+            } else {
+                System.err.println("Error al conectar con la base de datos.");
             }
         } catch (SQLException e) {
-            System.out.println("Error al mostrar las noticias: " + e.getMessage());
+            System.err.println("Error al registrar la noticia: " + e.getMessage());
+            e.printStackTrace();
         }
-    }
 
-    public static void main(String[] args) {
-        NoticiaManager manager = new NoticiaManager();
-        Scanner scanner = new Scanner(System.in);
-
-        // Solicitar información para registrar una nueva noticia
-        System.out.print("Ingrese el título de la noticia: ");
-        String titulo = scanner.nextLine();
-
-        System.out.print("Ingrese el autor de la noticia: ");
-        String autor = scanner.nextLine();
-
-        System.out.print("Ingrese el contenido de la noticia: ");
-        String contenido = scanner.nextLine();
-
-        System.out.print("Ingrese la fecha de creación (YYYY-MM-DD): ");
-        String fechaCreacion = scanner.nextLine();
-
-        System.out.print("Ingrese la fecha de publicación (YYYY-MM-DD): ");
-        String fechaPublicacion = scanner.nextLine();
-
-        System.out.print("Ingrese el ID de la categoría: ");
-        int categoriaID = scanner.nextInt();
-
-        // Insertar la noticia en la base de datos
-        manager.insertarNoticia(titulo, autor, contenido, fechaCreacion, fechaPublicacion, categoriaID);
-
-        // Mostrar todas las noticias
-        System.out.println("\nTodas las noticias registradas:");
-        manager.mostrarNoticias();
-
-        scanner.close();
+        return success;
     }
 }
