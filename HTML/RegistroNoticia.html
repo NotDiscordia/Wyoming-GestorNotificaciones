@@ -241,7 +241,7 @@
         categoria: categoria
     };
 
-            fetch('http://localhost:8081/NoticiaServlet', {
+            fetch('http://localhost:63342/Wyoming-GestorNotificaciones/Noticia/webapp/WEB-INF/index.html', {
             method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -256,10 +256,10 @@
         alert("Error al registrar la noticia");
     }
     })
-        .catch(error => {
+       /* .catch(error => {
         console.error('Error:', error);
         alert("Hubo un problema al conectar con el servidor.");
-    });
+    }); */
     }
 </script>
 </body>
