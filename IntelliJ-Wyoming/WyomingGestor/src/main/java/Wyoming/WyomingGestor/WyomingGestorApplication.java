@@ -11,6 +11,8 @@ public class WyomingGestorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WyomingGestorApplication.class, args);
+
+		System.out.println("La aplicación está corriendo en: http://localhost:8080/");
 	}
 
 	@Bean

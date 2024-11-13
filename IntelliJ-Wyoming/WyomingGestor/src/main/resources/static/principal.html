@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Notificaciones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/CSS/StylePrincipal.css" />
+</head>
+<body>
+<div class="header">
+    <h1>Gestor de notificaciones</h1>
+    <button onclick="logout()" class="button" style="background: none; border: none; cursor: pointer;">
+        <img src="../java/Wyoming/WyomingGestor/Web/iconosHTML/logout.png" alt="Logout" width="50px">
+    </button>
+</div>
+<div class="welcome">Bienvenido <span id="nombreUsuario"></span></div>
+
+<div class="logo">
+    <img src="https://citecuvp.tij.uabc.mx/wp-content/uploads/2022/10/ISOTIPO-UABC-COLORORIGINAL.png" alt="UABC Logo">
+</div>
+
+<div class="container">
+    <div class="main">
+        <div class="sidebar">
+            <button class="button" onclick="cambiarColor(this); window.location.href='GestorUsuarios.html'">Gestión de Usuarios</button>
+            <button class="button" onclick="cambiarColor(this); window.location.href='GestorNoticias.html'">Gestión de Noticias</button>
+            <button class="button" onclick="cambiarColor(this)">Publicar Noticias</button>
+        </div>
+
+        <div class="notifications">
+            <h2>Notificaciones Publicadas</h2>
+
+            <div class="notification-item">
+                <strong>Ceremonia al aniversario 67 de UABC</strong><br>
+                Febrero 28 - 2024<br>
+                Publicado en Correo
+            </div>
+
+            <div class="notification-item">
+                <strong>Empieza la venta de Boletos de Sorteos</strong><br>
+                Junio 10 - 2024<br>
+                Publicado en Correo
+            </div>
+
+            <div class="notification-item">
+                <strong>Suspensión de clases</strong><br>
+                Octubre 1 - 2024<br>
+                Publicado en App Estudiantes
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="Ayuda.html">
+            <span style="font-size: 2rem;">&#10067;</span>
+        </a>
+    </div>
+</div>
+
+<script>
+    function cambiarColor(boton) {
+        const botones = document.querySelectorAll('.button');
+        botones.forEach(btn => btn.style.backgroundColor = '#0D7033');
+        boton.style.backgroundColor = '#DD971A';
+    }
+
+    function logout() {
+        // Lógica para cerrar sesión, si es necesario (limpiar cookies o sesiones)
+        window.location.href = "login.html";
+    }
+
+    // Simulación de obtener el nombre del usuario (esto debe ser reemplazado con datos del servidor)
+    document.getElementById('nombreUsuario').textContent = "${nombreUsuario}"; // Usa Thymeleaf o inserta el valor dinámico aquí
+</script>
+</body>
+</html>

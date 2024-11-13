@@ -15,7 +15,7 @@ body {
 }
 
 .background {
-    background-image: url('cimarron-fondo.png');
+    background-image: url('../cimarron-fondo.png');
     background-size: cover;
     background-position: center;
     width: 100%;
