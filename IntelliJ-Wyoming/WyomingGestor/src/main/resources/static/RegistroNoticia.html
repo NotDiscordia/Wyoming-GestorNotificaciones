@@ -7,8 +7,7 @@
         /* General */
         body {
             font-family: Arial, sans-serif;
-            
-            background-image: url('cimarron-fondo.png');
+            background-image: url('./cimarron-fondo.png');
             background-size: cover;
             background-position: center;
             color: #333;
@@ -22,7 +21,7 @@
         /* Contenedor principal */
         .container {
             background-color: #006400e6;
-            width: 600px; /* Ancho aumentado */
+            width: 600px;
             padding: 20px;
             border-radius: 15px;
             position: relative;
@@ -73,12 +72,12 @@
             border: none;
             border-radius: 5px;
             box-sizing: border-box;
-            resize: none; /* Evita que el usuario cambie el tamaño manualmente */
+            resize: none;
         }
 
         /* Caja de texto grande para "Contenido" */
         #contenido {
-            height: 100px; /* Altura inicial para el campo de contenido */
+            height: 100px;
         }
 
         /* Botón de registro */
@@ -135,18 +134,12 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        .modal p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
         .modal-buttons {
             display: flex;
             justify-content: space-around;
         }
 
-        .btn-confirm {
-            background-color: #4CAF50;
+        .btn-confirm, .btn-cancel {
             color: white;
             padding: 10px 20px;
             border: none;
@@ -155,86 +148,103 @@
             font-size: 16px;
         }
 
-        .btn-cancel {
-            background-color: #f44336;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+        .btn-confirm { background-color: #4CAF50; }
+        .btn-cancel { background-color: #f44336; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Botón de cerrar -->
-        <button class="btn-close"; onclick=" window.location.href='GestorNoticias.html'">&times;</button>
+<div class="container">
+    <!-- Botón de cerrar -->
+    <button class="btn-close" onclick="window.location.href='GestorNoticias.html'">&times;</button>
 
-        <h1>Registrar Noticia</h1>
+    <h1>Registrar Noticia</h1>
 
-        <form onsubmit="showModal(event)">
-            <div class="form-group">
-                <label for="titulo">Título</label>
-                <input type="text" id="titulo" name="titulo" required>
-            </div>
+    <form id="noticia-form">
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" required>
+        </div>
 
-            <div class="form-group">
-                <label for="autor">Autor</label>
-                <input type="text" id="autor" name="autor" required>
-            </div>
+        <div class="form-group">
+            <label for="autor">Autor</label>
+            <input type="text" id="autor" name="autor" required>
+        </div>
 
-            <div class="form-group">
-                <label for="contenido">Contenido</label>
-                <textarea id="contenido" name="contenido" required></textarea> <!-- Cambiado a textarea -->
-            </div>
+        <div class="form-group">
+            <label for="contenido">Contenido</label>
+            <textarea id="contenido" name="contenido" required></textarea>
+        </div>
 
-            <div class="form-group">
-                <label for="fecha">Fecha</label>
-                <input type="date" id="fecha" name="fecha" max="2024-10-30" required>
-            </div>
+        <div class="form-group">
+            <label for="fecha">Fecha de creación</label>
+            <input type="date" id="fecha" name="fecha" required readonly>
+        </div>
 
-            <div class="form-group">
-                <label for="categoria">Categoría</label>
-                <select id="categoria" name="categoria">
-                    <option value="Recordatorios">Recordatorios</option>
-                    <option value="Anuncios">Anuncios</option>
-                    <option value="Eventos">Eventos</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="categoriaid">Categoría</label>
+            <select id="categoriaid" name="categoriaid">
+                <option value="1">Recordatorios</option>
+                <option value="2">Anuncios</option>
+                <option value="3">Eventos</option>
+            </select>
+        </div>
 
-            <button type="submit" class="btn-submit">Registrar</button>
-        </form>
+        <input type="hidden" id="administradorid" value="1">
 
-        <!-- Botón de ayuda -->
-        <button class="btn-help">?</button>
-    </div>
+        <button type="submit" class="btn-submit">Registrar</button>
+    </form>
 
     <!-- Modal de confirmación -->
-    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
             <p>¿Desea confirmar el registro?</p>
             <div class="modal-buttons">
-                <button class="btn-confirm" onclick="confirmSubmit()">Aceptar</button>
-                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button class="btn-confirm" id="confirm-btn">Aceptar</button>
+                <button class="btn-cancel" id="cancel-btn">Cancelar</button>
             </div>
         </div>
     </div>
 
-    <script>
-        function showModal(event) {
-            event.preventDefault(); // Evita el envío inmediato del formulario
-            document.getElementById('modalOverlay').style.display = 'flex';
-        }
+    <!-- Botón de ayuda -->
+    <button class="btn-help" onclick="window.location.href='Ayuda.html'">?</button>
+</div>
 
-        function closeModal() {
-            document.getElementById('modalOverlay').style.display = 'none';
-        }
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const today = new Date();
+        today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+        const formattedDate = today.toISOString().split('T')[0];
+        document.getElementById('fecha').value = formattedDate;
+    });
+    // Manejo del envío del formulario
+    document.getElementById('noticia-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-        function confirmSubmit() {
-            closeModal();
-            alert("Registro confirmado");
+        const noticia = {
+            titulo: document.getElementById('titulo').value,
+            contenido: document.getElementById('contenido').value,
+            fechaCreacion: document.getElementById('fecha').value,
+            categoria: { categoriaID: document.getElementById('categoriaid').value },
+        };
+
+        try {
+            const response = await fetch('http://localhost:8080/api/noticias/registrar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(noticia),
+            });
+
+            if (response.ok) {
+                alert('Noticia registrada exitosamente');
+            } else {
+                alert('Error al registrar la noticia');
+            }
+        } catch (error) {
+            alert('Ocurrió un error: ' + error.message);
         }
-    </script>
+    });
+</script>
 </body>
 </html>
