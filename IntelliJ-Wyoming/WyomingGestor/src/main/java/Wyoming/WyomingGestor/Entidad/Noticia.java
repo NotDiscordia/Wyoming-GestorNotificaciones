@@ -1,46 +1,28 @@
 package Wyoming.WyomingGestor.Entidad;
 
+import Wyoming.WyomingGestor.Entidad.Categoria;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-
 import java.time.LocalDate;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "noticia")
+@Table(name = "Noticia")
 public class Noticia {
     @Id
-    @ColumnDefault("nextval('noticia_noticiaid_seq')")
-    @Column(name = "noticiaid", nullable = false)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long noticiaID;
 
-    @Size(max = 80)
-    @NotNull
-    @Column(name = "titulo", nullable = false, length = 80)
+    @Column(nullable = false, length = 80)
     private String titulo;
 
-    @NotNull
-    @Column(name = "contenido", nullable = false, length = Integer.MAX_VALUE)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String contenido;
 
-    @NotNull
-    @Column(name = "fechacreacion", nullable = false)
-    private LocalDate fechacreacion;
+    @Column(nullable = false)
+    private LocalDate fechaCreacion;
 
-    @Column(name = "fechapublicacion")
-    private LocalDate fechapublicacion;
+    @ManyToOne
+    @JoinColumn(name = "categoriaID", nullable = true)
+    private Categoria categoria;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "administradorid")
-    private Administrador administradorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoriaid")
-    private Categoria categoriaid;
-
+    // Getters y Setters
 }
