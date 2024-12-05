@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Usuarios</title>
+    <title>Gestión de Noticias</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -14,16 +14,15 @@
         .header {
             background-color: #E0E0E0;
             padding: 20px;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color: #333;
             font-size: 1.5rem;
             font-weight: bold;
-            position: relative;
+            margin-left: 220px; /* Mueve el encabezado hacia la derecha */
         }
         .logout-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             background-color: #0D7033;
             color: white;
             border: none;
@@ -87,14 +86,11 @@
             align-items: center;
             color: white;
         }
-        .actions .edit {
+        .actions .icon-green {
             background-color: #0D7033;
         }
         .actions .delete {
             background-color: #B22222;
-        }
-        .actions .icon-green {
-            background-color: #0D7033;
         }
         table {
             width: 100%;
@@ -120,76 +116,78 @@
             font-size: 2rem;
             color: #333;
         }
-        .btn-help {
-            background-color: black;
+        .publish-button {
+            background-color: #0D7033;
+            color: white;
             border: none;
-            color: #fff;
-            font-size: 18px;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 1rem;
             cursor: pointer;
-            position: absolute;
-            bottom: 10px;
-            right: 0px;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: fixed;
+            bottom: 20px;
+            right: 100px;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        Bienvenido a la gestión de Noticias
+        <button class="logout-button" href="login.xhtml">&#128682;</button> <!-- Icono de salida -->
+    </div>
+
     <div class="sidebar">
-        <img src="https://static.wixstatic.com/media/d37dc4_5386a03afdd34069a3b43974d6b2a3ce~mv2.png/v1/fill/w_296,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/UABC_escudo_SER%20(2).png" alt="LogoUABC">
-        <a href='/Wyoming-GestorNotificaciones/webapp/WEB-INF/index.html'>Volver al Menú Principal</a>
-        <a href="GestorNoticias.html">Ir a Gestión de Noticias</a>
+        <img src="https://static.wixstatic.com/media/d37dc4_5386a03afdd34069a3b43974d6b2a3ce~mv2.png/v1/fill/w_296,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/UABC_escudo_SER%20(2).png" alt="Logo UABC">
+        <a href="principal.html">Volver al Menú Principal</a>
+        <a href="gestorusuarios.html">Ir a Gestión de Usuarios</a>
+        
     </div>
 
     <div class="container">
-        <div class="header">
-            Bienvenido a la gestión de usuarios
-            <button class="logout-button" window.location.href = "login.html";>
-                &#128682; <!-- Icono de salida -->
-            </button>
-        </div>
-
         <div class="actions">
-            <button class="icon-green"; onclick=" window.location.href='ResgistroUsuarios.html'">&#128101;</button> <!-- Icono de agregar usuario -->
-            <button class="edit">&#9998;</button> <!-- Icono de lápiz (editar) -->
-            <button class="delete">&#128465;</button> <!-- Icono de papelera (borrar) -->
+            <button class="icon-green" onclick=" window.location.href='RegistroNoticia.html'">&#128196;</button> <!-- Icono de consulta -->
+            <button class="icon-green">&#9998;</button> <!-- Icono de editar -->
+            <button class="delete">&#128465;</button> <!-- Icono de eliminar -->
             <button class="icon-green">&#8635;</button> <!-- Icono de actualizar -->
             <button class="icon-green">&#128214;</button> <!-- Icono de lista -->
-            <button class="icon-green">&#128269;</button> <!-- Icono de lupa (buscar) -->
+            <button class="icon-green">&#128269;</button> <!-- Icono de búsqueda -->
         </div>
 
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Permisos</th>
+                    <th>No.</th>
+                    <th>Título</th>
+                    <th>Cuerpo</th>
+                    <th>Fecha</th>
+                    <th>Categoría</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Juan Pérez</td>
-                    <td>juan.perez@ejemplo.com</td>
-                    <td>Administrador</td>
+                    <td>Inauguración de nueva biblioteca</td>
+                    <td>Se inauguró la nueva biblioteca central.</td>
+                    <td>28/02/2024</td>
+                    <td>Cultura</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>María García</td>
-                    <td>maria.garcia@ejemplo.com</td>
-                    <td>Editor</td>
+                    <td>Venta de boletos de sorteos</td>
+                    <td>Comienza la venta de boletos de sorteos UABC.</td>
+                    <td>10/06/2024</td>
+                    <td>Eventos</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
+    <button class="publish-button">Publicar Noticia</button>
+
     <div class="footer">
-        <button class="btn-help" onclick="window.location.href='Ayuda.html'">?</button>
+        <a href="ayuda.html">
+            <span style="font-size: 2rem;">&#10067;</span>
+        </a>
     </div>
 </body>
 </html>

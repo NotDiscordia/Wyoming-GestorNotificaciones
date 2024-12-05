@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestor de Notificaciones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E0E0E0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0px;
+        }
+        .header {
+            background-color: #0D7033;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .welcome {
+            font-size: 1rem;
+            text-align: end;
+        }
+        .logo {
+            margin: 20px 0;
+            display: flex;
+            justify-content: left;
+        }
+        .logo img {
+            height: 120px;
+        }
+        .main {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .button {
+            background-color: #0D7033;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background-color: #09682E;
+        }
+        .notifications {
+            background-color: #20884B;
+            color: white;
+            border-radius: 20px;
+            padding: 20px;
+            width: 70%;
+        }
+        .notifications h2 {
+            margin-top: 0;
+        }
+        .notification-item {
+            margin-bottom: 20px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .btn-help {
+            background-color: black;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 0px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Gestor de notificaciones</h1>
+    <button class="logout-button" href="login.html">&#128682;</button> <!-- Icono de salida -->
+</div>
+<div class="welcome">Bienvenido @Usuario</div>
+
+<div class="logo">
+    <img src="https://citecuvp.tij.uabc.mx/wp-content/uploads/2022/10/ISOTIPO-UABC-COLORORIGINAL.png" alt="UABC Logo">
+</div>
+
+<div class="container">
+    <div class="main">
+        <div class="sidebar">
+            <button class="button" onclick="cambiarColor(this); window.location.href='/Wyoming-GestorNotificaciones/HTML/GestorUsuarios.html'">Gestión de Usuarios</button>
+            <button class="button" onclick="cambiarColor(this); window.location.href='/Wyoming-GestorNotificaciones/HTML/GestorNoticias.html'">Gestión de Noticias</button>
+            <button class="button" onclick="cambiarColor(this)">Publicar Noticias</button>
+        </div>
+
+        <div class="notifications">
+            <h2>Notificaciones Publicadas</h2>
+
+            <div class="notification-item">
+                <strong>Ceremonia al aniversario 67 de UABC</strong><br>
+                Febrero 28 - 2024<br>
+                Publicado en Correo
+            </div>
+
+            <div class="notification-item">
+                <strong>Empieza la venta de Boletos de Sorteos</strong><br>
+                Junio 10 - 2024<br>
+                Publicado en Correo
+            </div>
+
+            <div class="notification-item">
+                <strong>Suspensión de clases</strong><br>
+                Octubre 1 - 2024<br>
+                Publicado en App Estudiantes
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button class="btn-help" onclick="window.location.href='Ayuda.html'">?</button>
+    </div>
+</div>
+
+<script>
+    // Función para cambiar color del botón cuando se hace clic
+    function cambiarColor(boton) {
+        const botones = document.querySelectorAll('.button');
+        botones.forEach(btn => btn.style.backgroundColor = '#0D7033');
+        boton.style.backgroundColor = '#DD971A';
+    }
+</script>
+</body>
+</html>

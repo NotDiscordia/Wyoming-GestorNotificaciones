@@ -14,14 +14,11 @@ CREATE TABLE Categoria (
     Nombre VARCHAR(50) NOT NULL
 );
 
--- Crear tabla Autor con las nuevas columnas Organización y Cargo
+-- Crear tabla Autor
 CREATE TABLE Autor (
     AutorID SERIAL PRIMARY KEY,
-    Nombre VARCHAR(50) NOT NULL,
-    Organización VARCHAR(50),
-    Cargo VARCHAR(50)
+    Nombre VARCHAR(50) NOT NULL
 );
-
 
 -- Crear tabla Noticia
 CREATE TABLE Noticia (
@@ -54,3 +51,11 @@ CREATE TABLE Notificacion (
     CONSTRAINT fk_noticia_notificacion FOREIGN KEY (NoticiaID) REFERENCES Noticia(NoticiaID),
     CONSTRAINT fk_publicado_por FOREIGN KEY (PublicadoPor) REFERENCES Administrador(AdministradorID)
 );
+
+-- Insertar un administrador predeterminado para evitar errores de clave foránea
+INSERT INTO Administrador (Nombre, Correo, Contraseña, Permisos, PermisoPublicar)
+VALUES ('Admin Default', 'admin@default.com', 'default123', true, true);
+
+-- Insertar una categoría predeterminada para evitar errores de clave foránea
+INSERT INTO Categoria (Nombre)
+VALUES ('General');
