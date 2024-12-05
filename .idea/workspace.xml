@@ -9,13 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb9c6a61-84f0-4448-9158-5d399b742f9c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Wyoming-GestorNotificaciones.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Wyoming-GestorNotificaciones.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/warserver/warserver.war" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/warserver/warserver.war" afterDir="false" />
-    </list>
+    <list default="true" id="cb9c6a61-84f0-4448-9158-5d399b742f9c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +74,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/hylia/Downloads/examen/Wyoming-GestorNotificaciones/IntelliJ-Wyoming",
+    "last_opened_file_path": "C:/Users/Usuario X/Documents/GitHub/Wyoming-GestorNotificaciones/IntelliJ-Wyoming",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -118,7 +112,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Noticia" />
@@ -202,6 +196,7 @@
       <workItem from="1731452980809" duration="16000" />
       <workItem from="1732149005265" duration="412000" />
       <workItem from="1732149431008" duration="367000" />
+      <workItem from="1733291372992" duration="24000" />
     </task>
     <servers />
   </component>

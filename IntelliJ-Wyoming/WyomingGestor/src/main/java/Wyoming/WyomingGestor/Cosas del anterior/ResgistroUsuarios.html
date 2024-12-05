@@ -7,7 +7,6 @@
         /* General */
         body {
             font-family: Arial, sans-serif;
-           
             background-image: url('./cimarron-fondo.png');
             background-size: cover;
             background-position: center;
@@ -168,73 +167,97 @@
             cursor: pointer;
             font-size: 16px;
         }
+
+        /* Mensajes de Error o Éxito */
+        .message {
+            color: red;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .success-message {
+            color: green;
+            text-align: center;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Botón de cerrar -->
-        <button class="btn-close"; onclick=" window.location.href='GestorUsuarios.html'">&times;</button>
+<div class="container">
+    <!-- Botón de cerrar -->
+    <button class="btn-close" onclick=" window.location.href='GestorUsuarios.html'">&times;</button>
 
-        <h1>Registrar Usuario</h1>
+    <h1>Registrar Usuario</h1>
 
-        <form onsubmit="showModal(event)">
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required>
-            </div>
-
-            <div class="form-group">
-                <label for="matricula">Matrícula</label>
-                <input type="text" id="matricula" name="matricula" required>
-            </div>
-
-            <div class="form-group">
-                <label for="correo">Correo</label>
-                <input type="email" id="correo" name="correo" required>
-            </div>
-
-            <div class="form-group">
-                <label for="contrasena">Contraseña</label>
-                <input type="password" id="contrasena" name="contrasena" required>
-            </div>
-
-            <div class="form-check">
-                <input type="checkbox" id="permisos" name="permisos">
-                <label for="permisos">¿Habilitar permisos para registrar usuarios?</label>
-            </div>
-
-            <button type="submit" class="btn-submit">Registrar</button>
-        </form>
-
-        <!-- Botón de ayuda -->
-        <button class="btn-help">?</button>
+    <!-- Mensajes de Error o Éxito -->
+    <div id="messageContainer">
+        <% if (request.getParameter("error") != null) { %>
+        <div class="message">Error al registrar el usuario. Por favor, inténtalo de nuevo.</div>
+        <% } %>
+        <% if (request.getParameter("registro") != null) { %>
+        <div class="success-message">¡Registro exitoso! Ahora puedes iniciar sesión.</div>
+        <% } %>
     </div>
 
-    <!-- Modal de confirmación -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal">
-            <p>¿Desea confirmar el registro?</p>
-            <div class="modal-buttons">
-                <button class="btn-confirm" onclick="confirmSubmit()">Aceptar</button>
-                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
-            </div>
+    <!-- Formulario de Registro -->
+    <form action="/registro" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <div class="form-group">
+            <label for="matricula">Matrícula</label>
+            <input type="text" id="matricula" name="matricula" required>
+        </div>
+
+        <div class="form-group">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" name="correo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" required>
+        </div>
+
+        <div class="form-check">
+            <input type="checkbox" id="permisos" name="permisos">
+            <label for="permisos">¿Habilitar permisos para registrar usuarios?</label>
+        </div>
+
+        <button type="submit" class="btn-submit">Registrar</button>
+    </form>
+
+    <!-- Botón de ayuda -->
+    <button class="btn-help">?</button>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <p>¿Desea confirmar el registro?</p>
+        <div class="modal-buttons">
+            <button class="btn-confirm" onclick="confirmSubmit()">Aceptar</button>
+            <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
         </div>
     </div>
+</div>
 
-    <script>
-        function showModal(event) {
-            event.preventDefault(); // Evita el envío inmediato del formulario
-            document.getElementById('modalOverlay').style.display = 'flex';
-        }
+<script>
+    function showModal(event) {
+        event.preventDefault(); // Evita el envío inmediato del formulario
+        document.getElementById('modalOverlay').style.display = 'flex';
+    }
 
-        function closeModal() {
-            document.getElementById('modalOverlay').style.display = 'none';
-        }
+    function closeModal() {
+        document.getElementById('modalOverlay').style.display = 'none';
+    }
 
-        function confirmSubmit() {
-            closeModal();
-            alert("Registro confirmado"); 
-        }
-    </script>
+    function confirmSubmit() {
+        closeModal();
+        alert("Registro confirmado");
+    }
+</script>
 </body>
 </html>
