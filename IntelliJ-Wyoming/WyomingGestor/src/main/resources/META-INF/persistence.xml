@@ -10,9 +10,9 @@
         <class>Wyoming.WyomingGestor.Entidad.Notificacion</class>
         <properties>
             <!-- Configuraciones para PostgreSQL -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/WyomingGestor"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:2276/WyomingGestor"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
-            <property name="jakarta.persistence.jdbc.password" value="1234"/>
+            <property name="jakarta.persistence.jdbc.password" value="12345"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 

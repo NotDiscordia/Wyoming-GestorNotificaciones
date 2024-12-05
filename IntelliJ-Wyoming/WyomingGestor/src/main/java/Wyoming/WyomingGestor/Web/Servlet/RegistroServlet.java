@@ -11,54 +11,57 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/registro")  // Aquí se define la URL para el servlet
+@WebServlet("/ResgistroUsuarios")
 public class RegistroServlet extends HttpServlet {
 
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("miUnidadDePersistencia");
 
+    // Mostrar el formulario de registro (GET)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/ResgistroUsuarios.html").forward(request, response);
+    }
+
+    // Procesar el registro de usuario (POST)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Obtener los parámetros del formulario
         String nombre = request.getParameter("nombre");
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
-        boolean permisos = request.getParameter("permisos") != null;  // Validar permisos
-        boolean permisopublicar = request.getParameter("permisopublicar") != null; // Validar permiso de publicar
+        boolean permisos = request.getParameter("permisos") != null;
+        boolean permisopublicar = request.getParameter("permisopublicar") != null;
 
-        // Validación básica de campos
+        // Validación básica
         if (nombre == null || correo == null || contrasena == null) {
-            response.sendRedirect(request.getContextPath() + "/registro.html?error=1"); // Redirige si hay error
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("Error: Faltan campos obligatorios");
             return;
         }
 
+        // Guardar en la base de datos
         EntityManager em = emf.createEntityManager();
-
         try {
-            // Crear objeto Administrador
             Administrador admin = new Administrador();
             admin.setNombre(nombre);
             admin.setCorreo(correo);
-            admin.setContraseña(contrasena);  // Recuerda que deberías encriptar la contraseña
+            admin.setContraseña(contrasena);
             admin.setPermisos(permisos);
             admin.setPermisopublicar(permisopublicar);
 
-            // Iniciar transacción para guardar en la base de datos
             em.getTransaction().begin();
             em.persist(admin); // Guardar el nuevo administrador
             em.getTransaction().commit();
 
-            // Redirigir al login o mostrar éxito
-            response.sendRedirect(request.getContextPath() + "/login.html?registro=exitoso");
+            // Indicar que el formulario se ha procesado con éxito
+            response.setStatus(HttpServletResponse.SC_OK);  // Código 200 OK
+            response.getWriter().write("success");
 
         } catch (Exception e) {
-            // Si ocurre un error, hacer rollback de la transacción
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/registro.html?error=1"); // Redirige si error
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código 500 si hay un error
+            response.getWriter().write("Error en el servidor");
         } finally {
-            em.close(); // Cerrar el EntityManager
+            em.close();
         }
     }
 }
