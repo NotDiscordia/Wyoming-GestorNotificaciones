@@ -7,63 +7,145 @@
     <link rel="stylesheet" type="text/css" href="/CSS/GesNotStyles.css" />
 </head>
 <body>
-    <div class="header">
-        Bienvenido a la gestión de Noticias
-        <button class="logout-button" href="login.xhtml">&#128682;</button> <!-- Icono de salida -->
+<div class="header">
+    Bienvenido a la gestión de Noticias
+    <button class="logout-button" onclick="window.location.href='login.xhtml'">&#128682;</button> <!-- Icono de salida -->
+</div>
+
+<div class="sidebar">
+    <img src="https://static.wixstatic.com/media/d37dc4_5386a03afdd34069a3b43974d6b2a3ce~mv2.png/v1/fill/w_296,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/UABC_escudo_SER%20(2).png" alt="Logo UABC">
+    <a href="principal.html">Volver al Menú Principal</a>
+    <a href="gestorusuarios.html">Ir a Gestión de Usuarios</a>
+</div>
+
+<div class="container">
+    <div class="actions">
+        <button class="icon-green" onclick="window.location.href='RegistroNoticia.html'">&#128196;</button> <!-- Icono de consulta -->
+        <button class="icon-green" onclick="editarNoticia()">&#9998;</button> <!-- Icono de editar -->
+        <button class="delete" onclick="eliminarNoticia()">&#128465;</button> <!-- Icono de eliminar -->
+        <button class="icon-green" onclick="cargarNoticias()">&#8635;</button> <!-- Icono de actualizar -->
+        <button class="icon-green" onclick="verLista()">&#128214;</button> <!-- Icono de lista -->
+        <button class="icon-green" onclick="buscarNoticia()">&#128269;</button> <!-- Icono de búsqueda -->
     </div>
 
-    <div class="sidebar">
-        <img src="https://static.wixstatic.com/media/d37dc4_5386a03afdd34069a3b43974d6b2a3ce~mv2.png/v1/fill/w_296,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/UABC_escudo_SER%20(2).png" alt="Logo UABC">
-        <a href="principal.html">Volver al Menú Principal</a>
-        <a href="gestorusuarios.html">Ir a Gestión de Usuarios</a>
-        
-    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Título</th>
+            <th>Cuerpo</th>
+            <th>Fecha</th>
+            <th>Categoría</th>
+            <th>Acciones</th> <!-- Columna para las acciones de edición y eliminación -->
+        </tr>
+        </thead>
+        <tbody id="tablaNoticias">
+        <!-- Los datos se cargarán aquí -->
+        </tbody>
+    </table>
+</div>
 
-    <div class="container">
-        <div class="actions">
-            <button class="icon-green" onclick=" window.location.href='RegistroNoticia.html'">&#128196;</button> <!-- Icono de consulta -->
-            <button class="icon-green">&#9998;</button> <!-- Icono de editar -->
-            <button class="delete">&#128465;</button> <!-- Icono de eliminar -->
-            <button class="icon-green">&#8635;</button> <!-- Icono de actualizar -->
-            <button class="icon-green">&#128214;</button> <!-- Icono de lista -->
-            <button class="icon-green">&#128269;</button> <!-- Icono de búsqueda -->
-        </div>
+<button class="publish-button" onclick="publicarNoticia()">Publicar Noticia</button>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Título</th>
-                    <th>Cuerpo</th>
-                    <th>Fecha</th>
-                    <th>Categoría</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Inauguración de nueva biblioteca</td>
-                    <td>Se inauguró la nueva biblioteca central.</td>
-                    <td>28/02/2024</td>
-                    <td>Cultura</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Venta de boletos de sorteos</td>
-                    <td>Comienza la venta de boletos de sorteos UABC.</td>
-                    <td>10/06/2024</td>
-                    <td>Eventos</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="footer">
+    <a href="ayuda.html">
+        <span style="font-size: 2rem;">&#10067;</span>
+    </a>
+</div>
 
-    <button class="publish-button">Publicar Noticia</button>
+<script>
+    let noticias = []; // Variable para almacenar las noticias cargadas
 
-    <div class="footer">
-        <a href="ayuda.html">
-            <span style="font-size: 2rem;">&#10067;</span>
-        </a>
-    </div>
+    // Función para cargar los datos desde el backend
+    function cargarNoticias() {
+        fetch('/api/noticias')  // Llamada al backend (ajustar URL si es necesario)
+            .then(response => response.json())  // Parsear la respuesta JSON
+            .then(data => {
+                noticias = data; // Guardar las noticias en la variable
+                const tbody = document.getElementById('tablaNoticias');
+                tbody.innerHTML = '';  // Limpiar la tabla antes de agregar los nuevos datos
+
+                // Recorrer las noticias y agregar una fila a la tabla por cada una
+                data.forEach(noticia => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                            <td>${noticia.id}</td>
+                            <td>${noticia.titulo}</td>
+                            <td>${noticia.contenido}</td>
+                            <td>${noticia.fechaCreacion}</td>
+                            <td>${noticia.categoria}</td>
+                            <td>
+                                <button onclick="editarNoticia(${noticia.id})">&#9998;</button>
+                                <button onclick="eliminarNoticia(${noticia.id})">&#128465;</button>
+                            </td>
+                        `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Error al cargar las noticias:', error);
+            });
+    }
+
+    // Función para editar una noticia
+    function editarNoticia(id) {
+        // Redirigir a una página de edición con el ID de la noticia
+        window.location.href = `editarNoticia.html?id=${id}`; // Pasa el ID al formulario de edición
+    }
+
+    // Función para eliminar una noticia
+    function eliminarNoticia(id) {
+        if (confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
+            // Llamar a un backend para eliminar la noticia
+            fetch(`/api/noticias/eliminar/${id}`, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Noticia eliminada correctamente');
+                        cargarNoticias(); // Recargar las noticias después de la eliminación
+                    } else {
+                        alert('Hubo un problema al eliminar la noticia');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al eliminar noticia:', error);
+                });
+        }
+    }
+
+    // Funciones para los otros botones (actualizar, lista, buscar)
+    function verLista() {
+        alert("Aquí iría la funcionalidad de listar noticias");
+    }
+
+    function buscarNoticia() {
+        const searchTerm = prompt("Introduce el término de búsqueda");
+        const filteredNoticias = noticias.filter(n => n.titulo.includes(searchTerm) || n.categoria.includes(searchTerm));
+        mostrarNoticias(filteredNoticias);
+    }
+
+    // Mostrar las noticias filtradas
+    function mostrarNoticias(noticias) {
+        const tbody = document.getElementById('tablaNoticias');
+        tbody.innerHTML = '';
+        noticias.forEach(noticia => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                    <td>${noticia.id}</td>
+                    <td>${noticia.titulo}</td>
+                    <td>${noticia.contenido}</td>
+                    <td>${noticia.fechaCreacion}</td>
+                    <td>${noticia.categoria}</td>
+                    <td>
+                        <button onclick="editarNoticia(${noticia.id})">&#9998;</button>
+                        <button onclick="eliminarNoticia(${noticia.id})">&#128465;</button>
+                    </td>
+                `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Cargar las noticias al cargar la página
+    window.onload = cargarNoticias;
+</script>
 </body>
 </html>

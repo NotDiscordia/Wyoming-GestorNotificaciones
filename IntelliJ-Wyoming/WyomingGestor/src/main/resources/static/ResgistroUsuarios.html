@@ -13,7 +13,7 @@
     <h1>Registrar Usuario</h1>
 
     <!-- Formulario -->
-    <form onsubmit="showModal(event)" action="/ResgistroUsuarios" method="POST">
+    <form onsubmit="showModal(event)" action="/ResgistroUsuarios" method="POST" id="formRegistro">
         <div class="form-group">
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -46,34 +46,24 @@
 
         <button type="submit" class="btn-submit">Registrar</button>
     </form>
-
-    <!-- Mensaje de éxito -->
-    <div id="mensajeExitoso" class="oculto">
-        <p>¡Registro exitoso! Los campos han sido limpiados.</p>
-    </div>
-
 </div>
 
 <script>
-    // Función para mostrar el mensaje de éxito y limpiar los campos
+    // Función para enviar el formulario usando AJAX sin mostrar la pantalla de éxito
     window.onload = function() {
         const form = document.getElementById("formRegistro");
-        const mensajeExitoso = document.getElementById("mensajeExitoso");
 
         form.onsubmit = function(event) {
             event.preventDefault(); // Evitar el envío directo del formulario
 
             // Enviar la solicitud al servidor con AJAX
             const formData = new FormData(form);
-            fetch('/registro', {
+            fetch('/ResgistroUsuarios', {
                 method: 'POST',
                 body: formData
             })
                 .then(response => {
                     if (response.ok) {
-                        // Mostrar mensaje de éxito
-                        mensajeExitoso.classList.remove('oculto');
-
                         // Limpiar los campos del formulario
                         form.reset();
                     } else {

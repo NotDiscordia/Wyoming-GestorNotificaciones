@@ -23,11 +23,11 @@
 
     <div class="actions">
         <button class="icon-green" onclick="window.location.href='ResgistroUsuarios.html'">&#128101;</button> <!-- Icono de agregar usuario -->
-        <button class="edit">&#9998;</button> <!-- Icono de lápiz (editar) -->
-        <button class="delete">&#128465;</button> <!-- Icono de papelera (borrar) -->
-        <button class="icon-green">&#8635;</button> <!-- Icono de actualizar -->
-        <button class="icon-green">&#128214;</button> <!-- Icono de lista -->
-        <button class="icon-green">&#128269;</button> <!-- Icono de lupa (buscar) -->
+        <button class="edit" onclick="editarUsuario()">&#9998;</button> <!-- Icono de lápiz (editar) -->
+        <button class="delete" onclick="eliminarUsuario()">&#128465;</button> <!-- Icono de papelera (borrar) -->
+        <button class="icon-green" onclick="cargarUsuarios()">&#8635;</button> <!-- Icono de actualizar -->
+        <button class="icon-green" onclick="verLista()">&#128214;</button> <!-- Icono de lista -->
+        <button class="icon-green" onclick="buscarUsuario()">&#128269;</button> <!-- Icono de lupa (buscar) -->
     </div>
 
     <table>
@@ -37,6 +37,8 @@
             <th>Nombre</th>
             <th>Correo</th>
             <th>Permisos</th>
+            <th>Permisopublicar</th>
+            <th>Acciones</th> <!-- Columna para las acciones de edición y eliminación -->
         </tr>
         </thead>
         <tbody id="tablaUsuarios">
@@ -52,11 +54,14 @@
 </div>
 
 <script>
+    let usuarios = []; // Variable para almacenar los usuarios cargados
+
     // Función para cargar los datos desde el servlet
     function cargarUsuarios() {
-        fetch('/gestorUsuarios')  // Llamada al servlet
+        fetch('/GestorUsuarios')  // Llamada al servlet
             .then(response => response.json())  // Parsear la respuesta JSON
             .then(data => {
+                usuarios = data; // Guardar los usuarios en la variable
                 const tbody = document.getElementById('tablaUsuarios');
                 tbody.innerHTML = '';  // Limpiar la tabla antes de agregar los nuevos datos
 
@@ -68,6 +73,11 @@
                             <td>${usuario.nombre}</td>
                             <td>${usuario.correo}</td>
                             <td>${usuario.permisos}</td>
+                            <td>${usuario.permisopublicar}</td>
+                            <td>
+                                <button onclick="editarUsuario(${usuario.id})">&#9998;</button>
+                                <button onclick="eliminarUsuario(${usuario.id})">&#128465;</button>
+                            </td>
                         `;
                     tbody.appendChild(tr);
                 });
@@ -75,6 +85,67 @@
             .catch(error => {
                 console.error('Error al cargar los usuarios:', error);
             });
+    }
+
+    // Función para editar un usuario
+    function editarUsuario(id) {
+        // Encontrar el usuario por su ID
+        const usuario = usuarios.find(u => u.id === id);
+        if (usuario) {
+            // Redirigir a una página de edición con los datos del usuario
+            window.location.href = `editarUsuario.html?id=${id}`; // Pasa el ID al formulario de edición
+        }
+    }
+
+    // Función para eliminar un usuario
+    function eliminarUsuario(id) {
+        if (confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+            // Llamar a un backend para eliminar el usuario
+            fetch(`/eliminarUsuario/${id}`, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Usuario eliminado correctamente');
+                        cargarUsuarios(); // Recargar los usuarios después de la eliminación
+                    } else {
+                        alert('Hubo un problema al eliminar al usuario');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al eliminar usuario:', error);
+                });
+        }
+    }
+
+    // Funciones para los otros botones (actualizar, lista, buscar)
+    function verLista() {
+        alert("Aquí iría la funcionalidad de listar elementos");
+    }
+
+    function buscarUsuario() {
+        const searchTerm = prompt("Introduce el término de búsqueda");
+        const filteredUsers = usuarios.filter(u => u.nombre.includes(searchTerm) || u.correo.includes(searchTerm));
+        mostrarUsuarios(filteredUsers);
+    }
+
+    // Mostrar los usuarios filtrados
+    function mostrarUsuarios(users) {
+        const tbody = document.getElementById('tablaUsuarios');
+        tbody.innerHTML = '';
+        users.forEach(usuario => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${usuario.id}</td>
+                <td>${usuario.nombre}</td>
+                <td>${usuario.correo}</td>
+                <td>${usuario.permisos}</td>
+                <td>${usuario.permisopublicar}</td>
+                <td>
+                    <button onclick="editarUsuario(${usuario.id})">&#9998;</button>
+                    <button onclick="eliminarUsuario(${usuario.id})">&#128465;</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
     }
 
     // Cargar los usuarios al cargar la página

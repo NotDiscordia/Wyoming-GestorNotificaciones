@@ -47,17 +47,6 @@
         <button type="submit" class="btn-submit">Registrar</button>
     </form>
 
-    <!-- Modal de confirmación -->
-    <div class="modal-overlay" id="modal-overlay">
-        <div class="modal">
-            <p>¿Desea confirmar el registro?</p>
-            <div class="modal-buttons">
-                <button class="btn-confirm" id="confirm-btn">Aceptar</button>
-                <button class="btn-cancel" id="cancel-btn">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Botón de ayuda -->
     <button class="btn-help" onclick="window.location.href='Ayuda.html'">?</button>
 </div>
@@ -69,6 +58,7 @@
         const formattedDate = today.toISOString().split('T')[0];
         document.getElementById('fecha').value = formattedDate;
     });
+
     // Manejo del envío del formulario
     document.getElementById('noticia-form').addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -90,7 +80,8 @@
             });
 
             if (response.ok) {
-                alert('Noticia registrada exitosamente');
+                const result = await response.json();
+                alert('Noticia registrada exitosamente: ' + result); // Aquí puedes mostrar el mensaje de éxito
             } else {
                 alert('Error al registrar la noticia');
             }
