@@ -1,9 +1,6 @@
 package Wyoming.WyomingGestor.Entidad;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -16,9 +13,11 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "administrador")
 public class Administrador {
     @Id
-    @ColumnDefault("nextval('administrador_administradorid_seq')")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "administrador_seq")
+    @SequenceGenerator(name = "administrador_seq", sequenceName = "administrador_administradorid_seq", allocationSize = 1)
     @Column(name = "administradorid", nullable = false)
     private Integer id;
+
 
     @Size(max = 50)
     @NotNull

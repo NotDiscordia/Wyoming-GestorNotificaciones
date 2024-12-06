@@ -1,31 +1,17 @@
-package Wyoming.WyomingGestor.Entidad;
+package Wyoming.WyomingGestor.DTO;
 
 import Wyoming.WyomingGestor.Entidad.Categoria;
-import jakarta.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "Noticia")
-public class Noticia {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class NoticiaDTO {
     private Long noticiaID;
-
-    @Column(nullable = false, length = 80)
     private String titulo;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
     private String contenido;
-
-    @Column(nullable = false)
     private LocalDate fechaCreacion;
-
-    @ManyToOne
-    @JoinColumn(name = "categoriaID", nullable = true)
-    private Categoria categoria;
+    private Long categoriaID;  // Solo el ID de la categoría
 
     // Getters y Setters
+
     public Long getNoticiaID() {
         return noticiaID;
     }
@@ -58,11 +44,11 @@ public class Noticia {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Long getCategoriaID() {
+        return categoriaID;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoriaID(Long categoriaID) {
+        this.categoriaID = categoriaID;
     }
 }
