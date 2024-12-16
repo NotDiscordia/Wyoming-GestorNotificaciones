@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Noticia y Notificación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #00843D; /* Verde UABC */
+            border-radius: 8px;
+            padding: 20px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .container h1 {
+            color: #FFD700; /* Amarillo para resaltar */
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        input, select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: none;
+            font-size: 16px;
+        }
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #FFD700; /* Amarillo */
+            border: none;
+            color: #000;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #FFC107;
+        }
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: #000;
+        }
+        .modal-content button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Enviar Noticia y Notificación</h1>
+    <form id="newsForm">
+        <div class="form-group">
+            <label for="titulo">Título de la publicación</label>
+            <input type="text" id="titulo" name="titulo" required>
+        </div>
+        <div class="form-group">
+            <label for="noticia">Seleccionar Noticia</label>
+            <select id="noticia" name="noticia" required>
+                <!-- Las opciones se generarán dinámicamente -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div>
+        <div class="form-group">
+            <label>Publicar en:</label>
+            <input type="checkbox" id="correo" name="publicarEn" value="Correo">
+            <label for="correo">Correo Electrónico Institucional</label><br>
+            <input type="checkbox" id="alumnos" name="publicarEn" value="Alumnos">
+            <label for="alumnos">Aplicación Alumnos</label><br>
+            <input type="checkbox" id="pagina" name="publicarEn" value="Pagina">
+            <label for="pagina">Página UABC</label>
+        </div>
+        <button type="button" onclick="showConfirmation()">Publicar</button>
+    </form>
+</div>
+
+<div id="confirmationModal" class="confirmation-modal">
+    <div class="modal-content">
+        <p>¿Estás seguro de que deseas publicar esta noticia?</p>
+        <button onclick="submitForm()">Sí</button>
+        <button onclick="hideConfirmation()">No</button>
+    </div>
+</div>
+
+<script>
+    // Simulación de cargar noticias desde la base de datos
+    document.addEventListener('DOMContentLoaded', () => {
+        const noticias = [
+            { id: 1, titulo: 'Noticia 1' },
+            { id: 2, titulo: 'Noticia 2' },
+            { id: 3, titulo: 'Noticia 3' }
+        ];
+        const select = document.getElementById('noticia');
+        noticias.forEach(noticia => {
+            const option = document.createElement('option');
+            option.value = noticia.id;
+            option.textContent = noticia.titulo;
+            select.appendChild(option);
+        });
+    });
+
+    // Mostrar ventana de confirmación
+    function showConfirmation() {
+        document.getElementById('confirmationModal').style.display = 'flex';
+    }
+
+    // Ocultar ventana de confirmación
+    function hideConfirmation() {
+        document.getElementById('confirmationModal').style.display = 'none';
+    }
+
+    // Enviar formulario
+    function submitForm() {
+        document.getElementById('newsForm').submit();
+    }
+</script>
+</body>
+</html>
