@@ -1,6 +1,5 @@
 package Wyoming.WyomingGestor.Entidad;
 
-import Wyoming.WyomingGestor.Entidad.Categoria;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -21,9 +20,18 @@ public class Noticia {
     @Column(nullable = false)
     private LocalDate fechaCreacion;
 
-    @ManyToOne
-    @JoinColumn(name = "categoriaID", nullable = true)
-    private Categoria categoria;
+    @Column(nullable = false, length = 50)
+    private String categoria;
+
+    @Column(nullable = true, length = 100) // Nuevo campo 'autor'
+    private String autor;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.fechaCreacion == null) {
+            this.fechaCreacion = LocalDate.now();
+        }
+    }
 
     // Getters y Setters
     public Long getNoticiaID() {
@@ -58,11 +66,19 @@ public class Noticia {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 }

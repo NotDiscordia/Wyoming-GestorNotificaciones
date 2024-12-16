@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
+    <option name="newEntityIdStrategy" />
     <option name="reLastEntityCreationPackage" value="WyomingGestor/src/main/java/Wyoming/WyomingGestor" />
     <option name="reverseEngineeringLastDbConnectionId" value="c8e9eaeb-bf4c-40af-a076-3ad447ea40e2" />
   </component>
