@@ -49,6 +49,12 @@
             width: auto;
             margin-right: 10px;
         }
+        .error {
+            color: #FF0000;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
         button {
             background-color: #FFD700; /* Amarillo */
             border: none;
@@ -88,7 +94,7 @@
 <body>
 <div class="container">
     <h1>Enviar Noticia y Notificación</h1>
-    <form id="newsForm">
+    <form id="newsForm" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="titulo">Título de la publicación</label>
             <input type="text" id="titulo" name="titulo" required>
@@ -96,8 +102,14 @@
         <div class="form-group">
             <label for="noticia">Seleccionar Noticia</label>
             <select id="noticia" name="noticia" required>
+                <option value="" disabled selected>Selecciona una noticia</option>
                 <!-- Las opciones se generarán dinámicamente -->
             </select>
+        </div>
+        <div class="form-group">
+            <label for="destinatario">Correo del destinatario</label>
+            <input type="email" id="destinatario" name="destinatario" placeholder="correo@uabc.edu.mx" required>
+            <span id="emailError" class="error"></span>
         </div>
         <div class="form-group">
             <label for="fecha">Fecha</label>
@@ -105,14 +117,14 @@
         </div>
         <div class="form-group">
             <label>Publicar en:</label>
-            <input type="checkbox" id="correo" name="publicarEn" value="Correo">
+            <input type="checkbox" id="correo" name="publicarEn" value="Correo" checked disabled>
             <label for="correo">Correo Electrónico Institucional</label><br>
-            <input type="checkbox" id="alumnos" name="publicarEn" value="Alumnos">
-            <label for="alumnos">Aplicación Alumnos</label><br>
-            <input type="checkbox" id="pagina" name="publicarEn" value="Pagina">
-            <label for="pagina">Página UABC</label>
+            <input type="checkbox" id="alumnos" name="publicarEn" value="Alumnos" disabled>
+            <label for="alumnos">Aplicación Alumnos (No disponible)</label><br>
+            <input type="checkbox" id="pagina" name="publicarEn" value="Pagina" disabled>
+            <label for="pagina">Página UABC (No disponible)</label>
         </div>
-        <button type="button" onclick="showConfirmation()">Publicar</button>
+        <button type="submit">Publicar</button>
     </form>
 </div>
 
@@ -125,12 +137,12 @@
 </div>
 
 <script>
-    // Simulación de cargar noticias desde la base de datos
+    // Cargar noticias desde la base de datos
     document.addEventListener('DOMContentLoaded', () => {
         const noticias = [
-            { id: 1, titulo: 'Noticia 1' },
-            { id: 2, titulo: 'Noticia 2' },
-            { id: 3, titulo: 'Noticia 3' }
+            { id: 1, titulo: 'Noticia Importante' },
+            { id: 2, titulo: 'Evento Académico' },
+            { id: 3, titulo: 'Aviso General' }
         ];
         const select = document.getElementById('noticia');
         noticias.forEach(noticia => {
@@ -141,19 +153,20 @@
         });
     });
 
-    // Mostrar ventana de confirmación
-    function showConfirmation() {
-        document.getElementById('confirmationModal').style.display = 'flex';
-    }
+    // Validar formulario antes de enviar
+    function validateForm() {
+        const emailField = document.getElementById('destinatario');
+        const emailError = document.getElementById('emailError');
+        const email = emailField.value;
 
-    // Ocultar ventana de confirmación
-    function hideConfirmation() {
-        document.getElementById('confirmationModal').style.display = 'none';
-    }
+        // Validar que el correo termine en @uabc.edu.mx
+        if (!email.endsWith('@uabc.edu.mx')) {
+            emailError.textContent = 'El correo debe tener el dominio @uabc.edu.mx';
+            return false;
+        }
 
-    // Enviar formulario
-    function submitForm() {
-        document.getElementById('newsForm').submit();
+        emailError.textContent = ''; // Limpiar error si es válido
+        return true;
     }
 </script>
 </body>
