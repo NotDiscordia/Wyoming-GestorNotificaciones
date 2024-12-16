@@ -31,14 +31,22 @@
         </div>
     </div>
 
+    <!-- Alerta para campos vacíos -->
     <div id="alertaError" class="alerta oculto">
         <strong>Error:</strong> Debes llenar todos los campos.
         <button onclick="cerrarAlerta('alertaError')">&#x2716;</button>
     </div>
 
+    <!-- Alerta para credenciales incorrectas -->
     <div id="alertaCorreo" class="alerta oculto">
         <strong>Error:</strong> Correo o contraseña no válidos.
         <button onclick="cerrarAlerta('alertaCorreo')">&#x2716;</button>
+    </div>
+
+    <!-- Alerta para error de encriptación (si se implementa) -->
+    <div id="alertaEncriptacion" class="alerta oculto">
+        <strong>Error:</strong> Hubo un problema al procesar la contraseña.
+        <button onclick="cerrarAlerta('alertaEncriptacion')">&#x2716;</button>
     </div>
 </div>
 
@@ -46,17 +54,30 @@
     const form = document.getElementById('loginForm');
     const alertaError = document.getElementById('alertaError');
     const alertaCorreo = document.getElementById('alertaCorreo');
+    const alertaEncriptacion = document.getElementById('alertaEncriptacion');
 
     form.addEventListener('submit', function (e) {
         const correo = document.getElementById('correo').value.trim();
-        const password = document.getElementById('password').value.trim();
+        const contraseña = document.getElementById('contraseña').value.trim();  // Corrige el ID de "password" a "contraseña"
 
         // Validación de campos vacíos
-        if (correo === '' || password === '') {
+        if (correo === '' || contraseña === '') {
             e.preventDefault(); // Detiene el envío
             mostrarAlerta(alertaError);
         }
     });
+
+    // Mostrar alertas según el parámetro "error" del servlet
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if (error == '1') {
+            mostrarAlerta(alertaCorreo);  // Error de credenciales
+        } else if (error == '2') {
+            mostrarAlerta(alertaEncriptacion);  // Error de encriptación
+        }
+    }
 
     function mostrarAlerta(alerta) {
         alerta.classList.remove('oculto');

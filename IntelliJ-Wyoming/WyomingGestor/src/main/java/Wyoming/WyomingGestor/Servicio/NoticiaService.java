@@ -5,6 +5,8 @@ import Wyoming.WyomingGestor.Repository.NoticiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NoticiaService {
 
@@ -13,5 +15,10 @@ public class NoticiaService {
 
     public Noticia registrarNoticia(Noticia noticia) {
         return noticiaRepository.save(noticia);
+    }
+
+    // Nuevo método para obtener todas las noticias
+    public List<Noticia> obtenerTodasLasNoticias() {
+        return noticiaRepository.findAll();
     }
 }
