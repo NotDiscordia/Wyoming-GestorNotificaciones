@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Usuarios</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -19,6 +20,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             position: relative;
+            margin-left: 220px;
         }
         .logout-button {
             position: absolute;
@@ -60,7 +62,6 @@
             border-radius: 5px;
             font-size: 1rem;
             margin-bottom: 10px;
-            background-color: #0D7033;
             transition: background-color 0.3s;
         }
         .sidebar a:hover {
@@ -72,6 +73,7 @@
         }
         .actions {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
         }
@@ -99,6 +101,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
         }
         table, th, td {
             border: 1px solid #333;
@@ -120,62 +124,124 @@
             font-size: 2rem;
             color: #333;
         }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100px;
+                padding: 10px;
+            }
+            .sidebar a {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+            .sidebar img {
+                width: 70px;
+            }
+            .header {
+                margin-left: 100px;
+                font-size: 1.2rem;
+                padding: 10px;
+            }
+            .container {
+                margin-left: 100px;
+                padding: 10px;
+            }
+            .actions button {
+                width: 35px;
+                height: 35px;
+                font-size: 0.8rem;
+            }
+            table {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 70px;
+                padding: 5px;
+            }
+            .sidebar a {
+                font-size: 0.7rem;
+                padding: 5px;
+            }
+            .sidebar img {
+                width: 50px;
+            }
+            .header {
+                margin-left: 70px;
+                font-size: 1rem;
+                padding: 8px;
+            }
+            .container {
+                margin-left: 70px;
+                padding: 5px;
+            }
+            .actions button {
+                width: 30px;
+                height: 30px;
+                font-size: 0.7rem;
+            }
+            table {
+                font-size: 0.8rem;
+            }
+            .footer {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <img src="https://static.wixstatic.com/media/d37dc4_5386a03afdd34069a3b43974d6b2a3ce~mv2.png/v1/fill/w_296,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/UABC_escudo_SER%20(2).png" alt="LogoUABC">
-        <a href="principal.html">Volver al Menú Principal</a>
-        <a href="GestorNoticias.html">Ir a Gestión de Noticias</a>
+<div class="sidebar">
+    <img src="https://static.wixstatic.com/media/d37dc4_5386a03afdd34069a3b43974d6b2a3ce~mv2.png/v1/fill/w_296,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/UABC_escudo_SER%20(2).png" alt="Logo UABC">
+    <a href="principal.html">Volver al Menú Principal</a>
+    <a href="GestorNoticias.html">Ir a Gestión de Noticias</a>
+</div>
+
+<div class="container">
+    <div class="header">
+        Bienvenido a la gestión de usuarios
+        <button class="logout-button" onclick="window.location.href='login.html'">&#128682;</button>
     </div>
 
-    <div class="container">
-        <div class="header">
-            Bienvenido a la gestión de usuarios
-            <button class="logout-button" window.location.href = "login.html";>
-                &#128682; <!-- Icono de salida -->
-            </button>
-        </div>
-
-        <div class="actions">
-            <button class="icon-green"; onclick=" window.location.href='ResgistroUsuarios.html'">&#128101;</button> <!-- Icono de agregar usuario -->
-            <button class="edit">&#9998;</button> <!-- Icono de lápiz (editar) -->
-            <button class="delete">&#128465;</button> <!-- Icono de papelera (borrar) -->
-            <button class="icon-green">&#8635;</button> <!-- Icono de actualizar -->
-            <button class="icon-green">&#128214;</button> <!-- Icono de lista -->
-            <button class="icon-green">&#128269;</button> <!-- Icono de lupa (buscar) -->
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Permisos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Juan Pérez</td>
-                    <td>juan.perez@ejemplo.com</td>
-                    <td>Administrador</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>María García</td>
-                    <td>maria.garcia@ejemplo.com</td>
-                    <td>Editor</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="actions">
+        <button class="icon-green" onclick="window.location.href='ResgistroUsuarios.html'">&#128101;</button>
+        <button class="edit">&#9998;</button>
+        <button class="delete">&#128465;</button>
+        <button class="icon-green">&#8635;</button>
+        <button class="icon-green">&#128214;</button>
+        <button class="icon-green">&#128269;</button>
     </div>
 
-    <div class="footer">
-        <a href="ayuda.html">
-            <span style="font-size: 2rem;">&#10067;</span>
-        </a>
-    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Permisos</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Juan Pérez</td>
+            <td>juan.perez@ejemplo.com</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>María García</td>
+            <td>maria.garcia@ejemplo.com</td>
+            <td>Editor</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="footer">
+    <a href="ayuda.html">&#10067;</a>
+</div>
 </body>
 </html>

@@ -9,7 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb9c6a61-84f0-4448-9158-5d399b742f9c" name="Changes" comment="" />
+    <list default="true" id="cb9c6a61-84f0-4448-9158-5d399b742f9c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Controller/CorreoTestController.java.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Servicio/CorreoTestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/EnvioNotificaciones.html" beforeDir="false" afterPath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/EnvioNotificaciones.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/GestorNoticias.html" beforeDir="false" afterPath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/GestorNoticias.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/GestorUsuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/GestorUsuarios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/principal.html" beforeDir="false" afterPath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/principal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/IntelliJ-Wyoming/WyomingGestor/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,18 +73,21 @@
     "Application.Main.executor": "Run",
     "Application.NoticiaManager.executor": "Run",
     "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.EnvioNotificaciones.html.executor": "Run",
+    "JavaScript Debug.GestorNoticias.html.executor": "Run",
     "JavaScript Debug.RegistroNoticia.html (1).executor": "Run",
     "JavaScript Debug.RegistroNoticia.html.executor": "Run",
     "JavaScript Debug.index.html.executor": "Run",
     "JavaScript Debug.login.html.executor": "Run",
+    "JavaScript Debug.principal.html.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.Unnamed.executor": "Run",
     "Tomcat Server.servidorWyoming.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "AlapiscoVallejo2",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Usuario X/Documents/GitHub/Wyoming-GestorNotificaciones/IntelliJ-Wyoming",
+    "last_opened_file_path": "C:/Users/Usuario X/Documents/GitHub/Wyoming-GestorNotificaciones/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Servicio",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -97,6 +110,8 @@
       <recent name="Server" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Usuario X\Documents\GitHub\Wyoming-GestorNotificaciones\IntelliJ-Wyoming\WyomingGestor\src\main\java\Wyoming\WyomingGestor\Servicio" />
+      <recent name="C:\Users\Usuario X\Documents\GitHub\Wyoming-GestorNotificaciones\IntelliJ-Wyoming\WyomingGestor\src\main\java\Wyoming\WyomingGestor\Controller" />
       <recent name="C:\Users\hylia\Downloads\WyomingNotificaciones\Wyoming-GestorNotificaciones\Noticia\src\webapp\WEB-INF" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -112,14 +127,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Noticia" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JavaScript Debug.GestorNoticias.html">
     <configuration name="NoticiaManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="NoticiaManager" />
       <module name="Noticia" />
@@ -127,29 +135,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RegistroNoticia.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Wyoming-GestorNotificaciones/HTML/RegistroNoticia.html" useBuiltInWebServerPort="true">
+    <configuration name="EnvioNotificaciones.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Wyoming-GestorNotificaciones/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/EnvioNotificaciones.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Wyoming-GestorNotificaciones/Noticia/webapp/WEB-INF/index.html" useBuiltInWebServerPort="true">
+    <configuration name="GestorNoticias.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Wyoming-GestorNotificaciones/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/GestorNoticias.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="login.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Wyoming-GestorNotificaciones/IntelliJ-Wyoming/WyomingGestor/src/main/resources/static/login.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="principal.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Wyoming-GestorNotificaciones/IntelliJ-Wyoming/WyomingGestor/src/main/java/Wyoming/WyomingGestor/Cosas del anterior/principal.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Application.Main" />
       <item itemvalue="Application.NoticiaManager" />
+      <item itemvalue="JavaScript Debug.EnvioNotificaciones.html" />
+      <item itemvalue="JavaScript Debug.GestorNoticias.html" />
+      <item itemvalue="JavaScript Debug.principal.html" />
       <item itemvalue="JavaScript Debug.login.html" />
-      <item itemvalue="JavaScript Debug.index.html" />
-      <item itemvalue="JavaScript Debug.RegistroNoticia.html" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.GestorNoticias.html" />
+        <item itemvalue="JavaScript Debug.EnvioNotificaciones.html" />
+        <item itemvalue="JavaScript Debug.principal.html" />
         <item itemvalue="JavaScript Debug.login.html" />
         <item itemvalue="Application.NoticiaManager" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="JavaScript Debug.RegistroNoticia.html" />
       </list>
     </recent_temporary>
   </component>
@@ -197,6 +208,7 @@
       <workItem from="1732149005265" duration="412000" />
       <workItem from="1732149431008" duration="367000" />
       <workItem from="1733291372992" duration="24000" />
+      <workItem from="1734376679274" duration="1579000" />
     </task>
     <servers />
   </component>
