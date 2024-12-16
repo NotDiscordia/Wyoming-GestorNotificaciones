@@ -10,5 +10,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RegistroServlet</servlet-name>
+        <servlet-class>Wyoming.WyomingGestor.Web.Servlet.RegistroServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistroServlet</servlet-name>
+        <url-pattern>/ResgistroUsuarios</url-pattern>
+    </servlet-mapping>
+
     <!-- Configuración adicional -->
 </web-app>

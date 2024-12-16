@@ -24,22 +24,29 @@ public class LoginServlet extends HttpServlet {
         EntityManager em = emf.createEntityManager();
 
         try {
-            // Verificar si el usuario existe
+            // Buscar al administrador por correo
             Administrador admin = em.createQuery("SELECT a FROM Administrador a WHERE a.correo = :correo", Administrador.class)
                     .setParameter("correo", correo)
-                    .getSingleResult();
+                    .getResultList().stream().findFirst().orElse(null);
 
-            if (admin != null && admin.getContraseña().equals(contraseña)) {
-                // Credenciales correctas
-                System.out.println("Usuario autenticado correctamente. Redirigiendo a principal.html...");
-                response.sendRedirect(request.getContextPath() + "/principal.html");
+            if (admin != null) {
+                // Verificar la contraseña en texto plano
+                if (admin.getContraseña().equals(contraseña)) {
+                    // Credenciales correctas
+                    System.out.println("Usuario autenticado correctamente. Redirigiendo a principal.html...");
+                    response.sendRedirect(request.getContextPath() + "/principal.html");
+                } else {
+                    // Credenciales incorrectas
+                    System.out.println("Credenciales incorrectas.");
+                    response.sendRedirect(request.getContextPath() + "/login.html?error=1");
+                }
             } else {
-                // Credenciales incorrectas
-                System.out.println("Credenciales incorrectas.");
+                // Usuario no encontrado
+                System.out.println("Usuario no encontrado.");
                 response.sendRedirect(request.getContextPath() + "/login.html?error=1");
             }
         } catch (Exception e) {
-            // Error si el usuario no se encuentra
+            // Error genérico
             System.out.println("Error durante la autenticación: " + e.getMessage());
             response.sendRedirect(request.getContextPath() + "/login.html?error=1");
         } finally {
