@@ -1,5 +1,6 @@
 package Wyoming.WyomingGestor.Entidad;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -9,6 +10,7 @@ public class Noticia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id") // Serializar como 'id' en el JSON
     private Long noticiaID;
 
     @Column(nullable = false, length = 80)

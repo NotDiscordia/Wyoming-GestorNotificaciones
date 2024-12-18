@@ -119,14 +119,15 @@
  }
 
  // Función para editar una noticia
+ // Función para editar una noticia
  function editarNoticia(id) {
      if (id) {
          window.location.href = `RegistroNoticias.html?id=${id}`;
      } else {
          console.error('ID de la noticia no definido');
+         alert('No se puede editar la noticia: ID inválido.');
      }
  }
-
 
  // Función para eliminar una noticia
  function eliminarNoticia(id) {
@@ -140,9 +141,9 @@
              .then(response => {
                  if (response.ok) {
                      alert('Noticia eliminada correctamente');
-                     cargarNoticias();
+                     cargarNoticias(); // Actualiza la tabla después de eliminar
                  } else {
-                     alert('Error al eliminar la noticia.');
+                     alert('Error al eliminar la noticia. Verifica si existe o si el servidor responde correctamente.');
                  }
              })
              .catch(error => {
@@ -151,6 +152,7 @@
              });
      }
  }
+
 
 
  // Función para buscar noticias

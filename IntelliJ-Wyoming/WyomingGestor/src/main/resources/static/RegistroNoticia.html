@@ -45,20 +45,30 @@
     const form = document.getElementById('noticia-form');
 
     // Precargar datos si estamos en modo edición
+    // Precargar datos si estamos en modo edición
     if (id) {
         document.getElementById('tituloFormulario').textContent = 'Editar Noticia';
 
         fetch(`/api/noticias/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('idNoticia').value = data.id;
-                document.getElementById('titulo').value = data.titulo;
-                document.getElementById('autor').value = data.autor;
-                document.getElementById('contenido').value = data.contenido;
-                document.getElementById('categoria').value = data.categoria;
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar la noticia.');
+                }
+                return response.json();
             })
-            .catch(err => alert("Error al cargar los datos de la noticia."));
+            .then(data => {
+                document.getElementById('idNoticia').value = data.id || '';
+                document.getElementById('titulo').value = data.titulo || '';
+                document.getElementById('autor').value = data.autor || '';
+                document.getElementById('contenido').value = data.contenido || '';
+                document.getElementById('categoria').value = data.categoria || '';
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error al cargar los datos de la noticia.");
+            });
     }
+
 
     // Guardar o actualizar noticia
     form.addEventListener('submit', async (e) => {
