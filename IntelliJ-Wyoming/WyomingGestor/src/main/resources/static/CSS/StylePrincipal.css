@@ -1,15 +1,19 @@
+/* General */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #E0E0E0;
     margin: 0;
     padding: 0;
 }
+
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 30px;
 }
+
+/* Encabezado */
 .header {
     background-color: #0D7033;
     padding: 15px;
@@ -26,24 +30,33 @@ body {
     font-size: 1rem;
     text-align: end;
 }
+
+/* Logo */
 .logo {
     margin: 20px 0;
     display: flex;
-    justify-content: left;
+    justify-content: flex-start;
 }
 .logo img {
     height: 120px;
 }
+
+/* Contenido principal */
 .main {
     display: flex;
     justify-content: space-between;
+    gap: 20px;
     margin-top: 20px;
 }
+
+/* Barra lateral */
 .sidebar {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 25%;
 }
+
 .button {
     background-color: #0D7033;
     color: white;
@@ -58,6 +71,8 @@ body {
 .button:hover {
     background-color: #09682E;
 }
+
+/* Notificaciones */
 .notifications {
     background-color: #20884B;
     color: white;
@@ -71,10 +86,92 @@ body {
 .notification-item {
     margin-bottom: 20px;
 }
+
+/* Pie de página */
 .footer {
     position: absolute;
     bottom: 20px;
     right: 20px;
     font-size: 2rem;
     color: #333;
+}
+
+/* ========================= */
+/* Media Queries */
+/* Pantallas medianas */
+@media (max-width: 1024px) {
+    .main {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .notifications {
+        width: 100%;
+    }
+    .button {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+    .logo img {
+        height: 100px;
+    }
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .header h1 {
+        font-size: 1.3rem;
+    }
+    .welcome {
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
+    .logo img {
+        height: 80px;
+    }
+    .button {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+    .notifications {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    .header h1 {
+        font-size: 1.1rem;
+    }
+    .welcome {
+        font-size: 0.8rem;
+    }
+    .logo img {
+        height: 60px;
+    }
+    .button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    .notifications {
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .footer {
+        font-size: 1.5rem;
+        bottom: 10px;
+        right: 10px;
+    }
 }

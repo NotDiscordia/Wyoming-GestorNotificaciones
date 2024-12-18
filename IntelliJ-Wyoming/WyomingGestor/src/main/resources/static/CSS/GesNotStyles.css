@@ -121,3 +121,73 @@ td {
     bottom: 20px;
     right: 100px;
 }
+
+/* Media queries para pantallas medianas */
+@media (max-width: 1024px) {
+    .header {
+        margin-left: 200px; /* Reducir margen */
+        font-size: 1.2rem;
+    }
+    .container {
+        margin-left: 200px; /* Ajuste proporcional */
+    }
+    .sidebar {
+        width: 180px;
+    }
+    .sidebar img {
+        width: 80px;
+    }
+    .sidebar a {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .header {
+        margin-left: 0; /* Eliminar margen */
+        padding: 10px;
+        justify-content: center;
+        font-size: 1rem;
+    }
+    .sidebar {
+        width: 100px;
+        padding: 10px;
+    }
+    .sidebar img {
+        width: 60px;
+    }
+    .sidebar a {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    .container {
+        margin-left: 0;
+        padding: 10px;
+    }
+    .actions button {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Media queries para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .header {
+        font-size: 0.9rem;
+    }
+    .sidebar {
+        display: none; /* Ocultar barra lateral en pantallas muy pequeñas */
+    }
+    .container {
+        margin-left: 0;
+        padding: 10px;
+    }
+    .publish-button {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}

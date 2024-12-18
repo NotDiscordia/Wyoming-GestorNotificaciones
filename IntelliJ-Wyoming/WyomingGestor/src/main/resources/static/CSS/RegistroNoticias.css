@@ -15,7 +15,8 @@ body {
 /* Contenedor principal */
 .container {
     background-color: #006400e6;
-    width: 600px;
+    width: 90%; /* Adaptable al ancho de la pantalla */
+    max-width: 600px;
     padding: 20px;
     border-radius: 15px;
     position: relative;
@@ -24,7 +25,7 @@ body {
 
 h1 {
     color: #ffffff;
-    font-size: 24px;
+    font-size: 1.5rem; /* Escala relativa */
     margin-bottom: 20px;
     text-align: center;
 }
@@ -34,7 +35,7 @@ h1 {
     background-color: #006400;
     border: none;
     color: white;
-    font-size: 18px;
+    font-size: 1rem;
     cursor: pointer;
     position: absolute;
     top: -10px;
@@ -67,6 +68,7 @@ input[type="text"], input[type="date"], select, textarea {
     border-radius: 5px;
     box-sizing: border-box;
     resize: none;
+    font-size: 1rem; /* Escala relativa */
 }
 
 /* Caja de texto grande para "Contenido" */
@@ -81,7 +83,7 @@ input[type="text"], input[type="date"], select, textarea {
     padding: 10px 0;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1rem; /* Escala relativa */
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
@@ -93,11 +95,11 @@ input[type="text"], input[type="date"], select, textarea {
     background-color: black;
     border: none;
     color: #fff;
-    font-size: 18px;
+    font-size: 1rem; /* Escala relativa */
     cursor: pointer;
     position: absolute;
     bottom: 10px;
-    right: -100px;
+    right: -80px;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -123,7 +125,8 @@ input[type="text"], input[type="date"], select, textarea {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 300px;
+    width: 90%; /* Adaptable al ancho de la pantalla */
+    max-width: 300px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -139,8 +142,86 @@ input[type="text"], input[type="date"], select, textarea {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem; /* Escala relativa */
 }
 
 .btn-confirm { background-color: #4CAF50; }
 .btn-cancel { background-color: #f44336; }
+
+/* Media Queries */
+
+/* Pantallas medianas */
+@media (max-width: 1024px) {
+    .container {
+        padding: 15px;
+    }
+
+    .btn-help {
+        right: -60px;
+    }
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    .btn-close {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .btn-help {
+        right: -40px;
+    }
+
+    .modal {
+        max-width: 250px;
+    }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1rem;
+    }
+
+    input[type="text"], input[type="date"], select, textarea {
+        font-size: 0.9rem;
+    }
+
+    .btn-submit {
+        font-size: 0.9rem;
+        padding: 8px 0;
+    }
+
+    .btn-close {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8rem;
+    }
+
+    .btn-help {
+        right: -20px;
+    }
+
+    .modal {
+        max-width: 200px;
+    }
+
+    .btn-confirm, .btn-cancel {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+}
