@@ -2,6 +2,7 @@
   <library name="apache-maven-3.9">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../../../apache-maven-3.9.9-bin" />
+      <root url="file://$PROJECT_DIR$/../../../apache-maven-3.9.9" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
