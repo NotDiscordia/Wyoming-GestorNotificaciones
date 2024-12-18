@@ -16,13 +16,6 @@ public class RegistroServlet extends HttpServlet {
 
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("miUnidadDePersistencia");
 
-    // Mostrar el formulario de registro (GET)
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/ResgistroUsuarios.html").forward(request, response);
-    }
-
-    // Procesar el registro de usuario (POST)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
@@ -31,14 +24,12 @@ public class RegistroServlet extends HttpServlet {
         boolean permisos = request.getParameter("permisos") != null;
         boolean permisopublicar = request.getParameter("permisopublicar") != null;
 
-        // Validación básica
         if (nombre == null || correo == null || contrasena == null) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("Error: Faltan campos obligatorios");
             return;
         }
 
-        // Guardar en la base de datos
         EntityManager em = emf.createEntityManager();
         try {
             Administrador admin = new Administrador();
@@ -49,16 +40,15 @@ public class RegistroServlet extends HttpServlet {
             admin.setPermisopublicar(permisopublicar);
 
             em.getTransaction().begin();
-            em.persist(admin); // Guardar el nuevo administrador
+            em.persist(admin);
             em.getTransaction().commit();
 
-            // Indicar que el formulario se ha procesado con éxito
-            response.setStatus(HttpServletResponse.SC_OK);  // Código 200 OK
+            response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write("success");
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // Código 500 si hay un error
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("Error en el servidor");
         } finally {
             em.close();

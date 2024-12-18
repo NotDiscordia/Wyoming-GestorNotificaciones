@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Noticia y Notificación</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/Notificacion.css" />
+</head>
+<body>
+<!-- Contenedor principal -->
+<div class="container">
+    <!-- Botón de cerrar -->
+    <button class="btn-close" onclick="window.location.href='principal.html'">✖</button>
+
+    <!-- Encabezado -->
+    <h1>Enviar Noticia y Notificación</h1>
+
+    <!-- Formulario -->
+    <form id="newsForm">
+        <div class="form-group">
+            <label for="titulo">Título de la publicación</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Ingresa el título" required>
+        </div>
+        <div class="form-group">
+            <label for="noticia">Seleccionar Noticia</label>
+            <select id="noticia" name="noticia" required>
+                <option value="" disabled selected>Selecciona una noticia</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha de Publicación</label>
+            <input type="date" id="fecha" name="fecha" required>
+        </div>
+        <div class="form-group">
+            <label for="destinatario">Correo del destinatario</label>
+            <input type="email" id="destinatario" name="destinatario" placeholder="correo@uabc.edu.mx" required>
+            <span id="emailError" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label for="plataforma">Plataforma de envío</label>
+            <input type="text" id="plataforma" value="Correo Electrónico Institucional" disabled>
+        </div>
+        <button type="button" class="btn-submit" onclick="mostrarConfirmacion()">Enviar Notificación</button>
+    </form>
+</div>
+
+<!-- Modal de Confirmación -->
+<div class="modal-overlay" id="confirmacionModal" style="display: none;">
+    <div class="modal">
+        <h2>¿Estás seguro?</h2>
+        <p>¿Deseas enviar la notificación seleccionada?</p>
+        <div class="modal-buttons">
+            <button class="btn-confirm" onclick="enviarNotificacion()">Sí</button>
+            <button class="btn-cancel" onclick="cerrarConfirmacion()">No</button>
+        </div>
+    </div>
+</div>
+
+<!-- Botón de Ayuda -->
+<button class="btn-help" onclick="alert('Ayuda no disponible')">?</button>
+
+<!-- Script -->
+<script>
+    // Cargar noticias simuladas
+    document.addEventListener('DOMContentLoaded', () => {
+        const noticias = [
+            { id: 1, titulo: 'Noticia Importante' },
+            { id: 2, titulo: 'Evento Académico' },
+            { id: 3, titulo: 'Aviso General' }
+        ];
+        const select = document.getElementById('noticia');
+        noticias.forEach(noticia => {
+            const option = document.createElement('option');
+            option.value = noticia.titulo;
+            option.textContent = noticia.titulo;
+            select.appendChild(option);
+        });
+    });
+
+    // Mostrar modal de confirmación
+    function mostrarConfirmacion() {
+        const destinatario = document.getElementById('destinatario').value;
+        const emailError = document.getElementById('emailError');
+
+        if (!destinatario.endsWith('@uabc.edu.mx')) {
+            emailError.textContent = 'El correo debe tener el dominio @uabc.edu.mx';
+            return;
+        }
+        emailError.textContent = '';
+        document.getElementById('confirmacionModal').style.display = 'flex';
+    }
+
+    // Cerrar modal
+    function cerrarConfirmacion() {
+        document.getElementById('confirmacionModal').style.display = 'none';
+    }
+
+    // Enviar notificación
+    function enviarNotificacion() {
+        const destinatario = document.getElementById("destinatario").value;
+        const asunto = document.getElementById("titulo").value;
+        const mensaje = "Contenido de la noticia: " + document.getElementById("noticia").value;
+
+        const formData = new URLSearchParams();
+        formData.append("destinatario", destinatario);
+        formData.append("asunto", asunto);
+        formData.append("mensaje", mensaje);
+
+        fetch('http://localhost:8080/enviar-correo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formData.toString()
+        })
+            .then(response => response.text())
+            .then(data => {
+                alert("Respuesta del servidor: " + data);
+                cerrarConfirmacion();
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
